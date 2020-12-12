@@ -1,31 +1,17 @@
 package bubble
 
-import "github.com/google/uuid"
+import "time"
 
-type Auth interface {
-	ID() uuid.UUID
-	VenueRoles() VenueRoles
+// AuthenticationToken is a random byte value used to authenticate a request
+// for an IdentityToken. It is a single-use password, essentially.
+type AuthenticationToken struct {
+	Value  []byte
+	Expiry time.Time
 }
 
-type Person struct {
-	id    uuid.UUID
-	vrs   VenueRoles
-	Email string
-	Name  string
-}
-
-func (p Person) ID() uuid.UUID {
-	return p.id
-}
-
-func (p Person) VenueRoles() VenueRoles {
-	return p.vrs
-}
-
-func (p Person) NewMessage(text string, venueID uuid.UUID, isPublic bool) *Message {
-	return &Message{
-		id:      uuid.New(),
-		authID:  p.ID(),
-		venueID: venueID,
-	}
+// IdentityToken is a longer-lasting, multiple-use token for authenticating
+// application requests by a User who has already successfullly authenticated.
+type IdentityToken struct {
+	Value  []byte
+	Expiry time.Time
 }

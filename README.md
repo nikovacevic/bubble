@@ -26,8 +26,10 @@ The guiding principles are:
   - Document
   - Image
 
+_Note: see [pkg/bubble](https://github.com/nikovacevic/bubble/tree/master/pkg/bubble) for implementations of domain types._
+
 ### Auth
-Authenticate users using magic links. Respond to token-based authentication with 
+Authenticate users using magic links. Respond to token-based authentication with
 
 Request a magic link sent to the given
 ```
@@ -107,7 +109,7 @@ DELETE /message/{id}
 ### Media
 I don't love this name. Documents? Objects? Files?
 
-Get a piece of media 
+Get a piece of media
 ```
 GET /media/{id}
 ```

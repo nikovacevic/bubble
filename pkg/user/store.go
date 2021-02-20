@@ -1,7 +1,6 @@
 package user
 
 import (
-	"github.com/google/uuid"
 	"github.com/nikovacevic/bubble/pkg/bubble"
 )
 
@@ -13,7 +12,7 @@ type Store interface {
 	List(per, page int) ([]*bubble.User, error)
 
 	// Find should return the User belonging to the given ID
-	Find(id uuid.UUID) (*bubble.User, error)
+	Find(id int) (*bubble.User, error)
 
 	// Save should insert or update the given User
 	Save(user *bubble.User) error

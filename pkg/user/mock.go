@@ -4,13 +4,12 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/google/uuid"
 	"github.com/nikovacevic/bubble/pkg/bubble"
 )
 
 // MockStore implements the Store interface for testing
 type MockStore struct {
-	users map[uuid.UUID]*bubble.User
+	users map[int]*bubble.User
 }
 
 // NewMockStore creates a new MockStore with 10 hard-coded users
@@ -27,7 +26,7 @@ func NewMockStore() *MockStore {
 	users = append(users, bubble.NewUser("inga@getbubble.org", "Inga"))
 	users = append(users, bubble.NewUser("jake@getbubble.org", "Jake"))
 
-	userMap := map[uuid.UUID]*bubble.User{}
+	userMap := map[int]*bubble.User{}
 	for _, user := range users {
 		userMap[user.ID()] = user
 	}
@@ -37,24 +36,24 @@ func NewMockStore() *MockStore {
 
 // List should provide a the given page from paginated list of Users
 func (ms *MockStore) List(per, page int) ([]*bubble.User, error) {
-	usersByEmail := map[string]*bubble.User{}
-	emails := []string{}
+	usersByID := map[int]*bubble.User{}
+	ids := []int{}
 
 	for _, user := range ms.users {
-		emails = append(emails, user.Email)
-		usersByEmail[user.Email] = user.Clone()
+		ids = append(ids, user.ID())
+		usersByID[user.ID()] = user.Clone()
 	}
 
-	sort.Strings(emails)
+	sort.Ints(ids)
 
 	list := []*bubble.User{}
 	start := (page - 1) * per
 	end := (page) * per
 	for i := start; i < end; i++ {
-		if i >= len(emails) {
+		if i >= len(ids) {
 			break
 		}
-		if user, ok := usersByEmail[emails[i]]; ok {
+		if user, ok := usersByID[ids[i]]; ok {
 			list = append(list, user)
 		}
 	}
@@ -63,12 +62,12 @@ func (ms *MockStore) List(per, page int) ([]*bubble.User, error) {
 }
 
 // Find should return the User belonging to the given ID
-func (ms *MockStore) Find(id uuid.UUID) (*bubble.User, error) {
+func (ms *MockStore) Find(id int) (*bubble.User, error) {
 	if user, ok := ms.users[id]; ok {
 		return user, nil
 	}
 
-	return nil, fmt.Errorf("no user with ID: %s", id.String())
+	return nil, fmt.Errorf("no user with ID: %d", id)
 }
 
 // Save should insert or update the given User
@@ -77,8 +76,8 @@ func (ms *MockStore) Save(user *bubble.User) error {
 		return fmt.Errorf("cannot save nil user")
 	}
 
-	if user.ID().Variant() == uuid.Invalid {
-		return fmt.Errorf("cannot save user with invalid ID")
+	if user.ID() <= 0 {
+		return fmt.Errorf("cannot save user with invalid ID: %d", user.ID())
 	}
 
 	ms.users[user.ID()] = user

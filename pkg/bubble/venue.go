@@ -1,7 +1,5 @@
 package bubble
 
-import "github.com/google/uuid"
-
 // VenueType describes the type of venue
 type VenueType int
 
@@ -21,7 +19,7 @@ const (
 
 // Venue is a repository for Messages
 type Venue interface {
-	ID() uuid.UUID
+	ID() int
 	Name() string
 	IsPublic() bool
 }
@@ -30,7 +28,7 @@ type Venue interface {
 // It can be public or private. If no Users except the Owner have access, it
 // can be thought of as a static resource.
 type Page struct {
-	id       uuid.UUID
+	id       int
 	Name     string
 	Content  []byte
 	isPublic bool

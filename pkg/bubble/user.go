@@ -3,8 +3,6 @@ package bubble
 import (
 	"fmt"
 	"time"
-
-	"github.com/google/uuid"
 )
 
 // User is an identity that can be authenticated and can interact with
@@ -13,7 +11,7 @@ type User struct {
 	Email       string               `json:"email"`
 	Name        string               `json:"name"`
 	Permissions Permissions          `json:"permissions"`
-	id          uuid.UUID            `json:"-"`
+	id          int                  `json:"-"`
 	idToken     *IdentityToken       `json:"-"`
 	authToken   *AuthenticationToken `json:"-"`
 }
@@ -21,7 +19,6 @@ type User struct {
 // NewUser instantiates a new user with a new UUID and no auth/id tokens
 func NewUser(email, name string) *User {
 	return &User{
-		id:          uuid.New(),
 		Permissions: Permissions{},
 		Email:       email,
 		Name:        name,
@@ -34,16 +31,8 @@ func (u *User) Clone() *User {
 		return nil
 	}
 
-	id := &uuid.UUID{}
-	idText, err := u.id.MarshalText()
-	if err != nil {
-		newID := uuid.New()
-		id = &newID
-	}
-	err = id.UnmarshalText(idText)
-
 	return &User{
-		id:          *id,
+		id:          u.id,
 		Permissions: u.Permissions,
 		Email:       u.Email,
 		Name:        u.Name,
@@ -51,9 +40,9 @@ func (u *User) Clone() *User {
 }
 
 // ID returns a User's ID
-func (u *User) ID() uuid.UUID {
+func (u *User) ID() int {
 	if u == nil {
-		return uuid.Nil
+		return 0
 	}
 
 	return u.id
@@ -108,9 +97,9 @@ const (
 // Permission describes a tuple of a Role and a Venue, allowing the described
 // access to the identified Venue. Permissions should belong to Users.
 type Permission struct {
-	VenueID uuid.UUID
+	VenueID int
 	Role    Role
 }
 
 // Permissions are a set of Permission instances, keyed by VenueID
-type Permissions map[uuid.UUID]Permission
+type Permissions map[int]Permission

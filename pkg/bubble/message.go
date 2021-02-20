@@ -1,19 +1,17 @@
 package bubble
 
-import "github.com/google/uuid"
-
 // Message describes an object that can be sent to a Venue by a User.
 type Message interface {
 	// ID is the unique identifier of the message, itself.
-	ID() uuid.UUID
+	ID() int
 
 	// UserID is the unique indentifier of the sender.
-	UserID() uuid.UUID
+	UserID() int
 
 	// VenueID is the unique identifier of the venue to which the message
 	// has been sent.
 	// TODO: should this be plural, VenueIDs?
-	VenueID() uuid.UUID
+	VenueID() int
 
 	// IsPublic, if true, means the message can be seen by anyone, even those
 	// who are not authenticated.
@@ -26,26 +24,26 @@ type Message interface {
 // Direct implements Message for DMs. Currently just text, but could include
 // images, etc. eventually.
 type Direct struct {
-	id       uuid.UUID
-	userID   uuid.UUID
-	venueID  uuid.UUID
+	id       int
+	userID   int
+	venueID  int
 	isPublic bool
 	Text     string
 }
 
 // ID is the unique identifier of the message, itself.
-func (d *Direct) ID() uuid.UUID {
+func (d *Direct) ID() int {
 	return d.id
 }
 
 // UserID is the unique indentifier of the sender.
-func (d *Direct) UserID() uuid.UUID {
+func (d *Direct) UserID() int {
 	return d.userID
 }
 
 // VenueID is the unique identifier of the venue to which the message
 // has been sent.
-func (d *Direct) VenueID() uuid.UUID {
+func (d *Direct) VenueID() int {
 	return d.venueID
 }
 

@@ -1,123 +1,19 @@
-# Bubble: distributed platform for small communities
-Bubble should provide small-to-medium-sized groups with a place to communicate securely. Eventually, this will hopefully grow into a fully-featured social platform for posts, diret-messaging, events, polls, photos, etc.
+# Bubble: a platform for small communities
+Bubble should provide small communities with a place to securely communicate, organize, and exist on the web.
 
-The guiding principles are:
-- Keep it simple
-- Keep it small and distributed
-- Keep it secure
+## Founding idea
 
-## Modules
-- Auth: provides temporary access to a user
-- User: provides access to view and edit user-related resources
-- Venue: provides access to viewing, creating, and editing venues for sending messages
-  - Page: public or private repository for posts, events, polls, etc.
-  - Group: private repository for direct messages among select Users
-  - Event: public or private calendar event, repository for Invitations and RSVPs (also a Message)
-  - Poll: public or private respository for votes (also a Message)
-- Message: provides users ability to send messages in certain venues
-  - Post: public or private message belonging to a page or event
-  - Direct: private message belonging to a group
-  - Event: public or private calendar event (also a Venue)
-  - Invitation: public or private invitation to join an event
-  - RSVP: public or private message belonging to an event
-  - Poll: public or private message with vote options (also a Venue)
-  - Vote: public or private message belonging to a poll
-- Media: provides an API for storing and retrieving media (files) by URI
-  - Document
-  - Image
+From [the blog post explaining idea](https://blog.nikovacevic.io/exploring-a-new-idea-bubble/) behind the project:
+> I've begun exploring an idea: what would it mean to create a community platform that was anti-viral; that is, committed as a core principle to having useful boundaries within which something healthy can grow undisturbed. Want ads? No problem. Want to organize a group, publish a manifesto, plan events, and send direct messages? Go for it. Want to invite 6 billion people into one space? Not so fast.
 
-_Note: see [pkg/bubble](https://github.com/nikovacevic/bubble/tree/master/pkg/bubble) for implementations of domain types._
+## Guiding principles
+### Keep it small
+Smaller things have many advantages: higher social capital, lower volatility, simpler design, etc.
+### Keep it simple
+If it's simple, it will be easier to build, easier to understand, and easier to use.
+### Keep it secure
+If you can't trust it, what's the point?
 
-### Auth
-Authenticate users using magic links. Respond to token-based authentication with
-
-Request a magic link sent to the given
-```
-GET /auth/login?email={email}
-```
-Authenticate with OTP using the auth link
-```
-GET /auth/login?email={email}&token={token}
-```
-Log out of current session
-```
-POST /auth/logout
-```
-
-### User
-We should try to maintain as little personal information as possible. Perhaps just ID, email, and name to start. (And photo?)
-
-How should access control work? Roles and resources? Just roles? How do we tie a user to a venue with permissions?
-
-Get a list of users
-```
-GET /user
-```
-Add a new user (e.g. invite a user to join via email?)
-```
-POST /user
-```
-Update a user (keep edit history?)
-```
-PUT /user/{id}
-```
-Delete a user
-```
-DELETE /user/{id}
-```
-
-### Venue
-This is the main set of communication features: opening new pages and group chats; sending messages; creating and responding to events. Again, simple is best, and if possible it would be nice to keep all of it consolidated to a simple and robust API. (Perhaps we'll have to factor out some of the types that it's a stretch to call a "venue" or a "message", e.g. an event, like but we'll see.)
-
-Get a list of venues by type
-```
-GET /venue?type={type}
-```
-Create a new venue
-```
-POST /venue
-```
-Update a venue (keep edit history?)
-```
-PUT /venue/{id}
-```
-Get the given venue and its messages
-```
-GET /venue/{id}
-```
-Send a message to the given venue
-```
-POST /venue/{id}/message
-```
-
-### Message
-Most message creation will happen through venues, but we need to allow interacting directly with messages (e.g. linking directly to a specific message; editing; deleting).
-
-View a message with it's venue included for context
-```
-GET /message/{id}
-```
-Update a message (keep edit history?)
-```
-PUT /message/{id}
-```
-Delete a message
-```
-DELETE /message/{id}
-```
-
-### Media
-I don't love this name. Documents? Objects? Files?
-
-Get a piece of media
-```
-GET /media/{id}
-```
-Upload a new piece of media
-```
-POST /media/{id}
-```
-Delete a piece of media
-```
-DELETE /media/{id}
-```
+## Documentation
+- [Model](docs/MODEL.md): data model, API spec, general back-end design
+- [Resource](docs/RESOURCES.md): repository for external documents, reference material, etc.

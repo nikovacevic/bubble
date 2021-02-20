@@ -5,9 +5,9 @@ import (
 	"time"
 )
 
-// User is an identity that can be authenticated and can interact with
+// Account is an identity that can be authenticated and can interact with
 // resources (Venues, Messages, etc.)
-type User struct {
+type Account struct {
 	Email       string               `json:"email"`
 	Name        string               `json:"name"`
 	Permissions Permissions          `json:"permissions"`
@@ -16,22 +16,22 @@ type User struct {
 	authToken   *AuthenticationToken `json:"-"`
 }
 
-// NewUser instantiates a new user with a new UUID and no auth/id tokens
-func NewUser(email, name string) *User {
-	return &User{
+// NewAccount instantiates a new Account with a new UUID and no auth/id tokens
+func NewAccount(email, name string) *Account {
+	return &Account{
 		Permissions: Permissions{},
 		Email:       email,
 		Name:        name,
 	}
 }
 
-// Clone returns a clone of the User
-func (u *User) Clone() *User {
+// Clone returns a clone of the Account
+func (u *Account) Clone() *Account {
 	if u == nil {
 		return nil
 	}
 
-	return &User{
+	return &Account{
 		id:          u.id,
 		Permissions: u.Permissions,
 		Email:       u.Email,
@@ -39,8 +39,8 @@ func (u *User) Clone() *User {
 	}
 }
 
-// ID returns a User's ID
-func (u *User) ID() int {
+// ID returns a Account's ID
+func (u *Account) ID() int {
 	if u == nil {
 		return 0
 	}
@@ -48,8 +48,8 @@ func (u *User) ID() int {
 	return u.id
 }
 
-// String returns a string representation of the user
-func (u *User) String() string {
+// String returns a string representation of the Account
+func (u *Account) String() string {
 	if u == nil {
 		return "<nil>"
 	}
@@ -65,7 +65,7 @@ type AuthenticationToken struct {
 }
 
 // IdentityToken is a longer-lasting, multiple-use token for authenticating
-// application requests by a User who has already successfullly authenticated.
+// application requests by a Account who has already successfullly authenticated.
 type IdentityToken struct {
 	Value  []byte
 	Expiry time.Time
@@ -75,27 +75,27 @@ type IdentityToken struct {
 type Role int
 
 const (
-	// NoRole does not allow a User to interact with a Venue.
+	// NoRole does not allow a Account to interact with a Venue.
 	NoRole Role = iota
 
-	// ReaderRole allows a User read-only access to a Venue.
+	// ReaderRole allows a Account read-only access to a Venue.
 	ReaderRole
 
-	// WriterRole allows a User to send messages to a Venue, but not edit it,
-	// invite Users to it, or delete it.
+	// WriterRole allows a Account to send messages to a Venue, but not edit it,
+	// invite Accounts to it, or delete it.
 	WriterRole
 
-	// EditorRole allows a User to edit and send messages to a Venue, as well
-	// as to invite Users. Editors cannot delete a Venue.
+	// EditorRole allows a Account to edit and send messages to a Venue, as well
+	// as to invite Accounts. Editors cannot delete a Venue.
 	EditorRole
 
-	// OwnerRole should be unique to one User. It is given to the creator of a
+	// OwnerRole should be unique to one Account. It is given to the creator of a
 	// Venue, but can be transferred. Confers access to all features.
 	OwnerRole
 )
 
 // Permission describes a tuple of a Role and a Venue, allowing the described
-// access to the identified Venue. Permissions should belong to Users.
+// access to the identified Venue. Permissions should belong to Accounts.
 type Permission struct {
 	VenueID int
 	Role    Role

@@ -3,14 +3,13 @@
 ## Model
 
 ### Modules
-- Auth: provides temporary access to a user
-- User: provides access to view and edit user-related resources
+- Account: provides access to view and edit account-related resources
 - Venue: provides access to viewing, creating, and editing venues for sending messages
   - Page: public or private repository for posts, events, polls, etc.
-  - Group: private repository for direct messages among select Users
+  - Group: private repository for direct messages among select Accounts
   - Event: public or private calendar event, repository for Invitations and RSVPs (also a Message)
   - Poll: public or private respository for votes (also a Message)
-- Message: provides users ability to send messages in certain venues
+- Message: provides accounts ability to send messages in certain venues
   - Post: public or private message belonging to a page or event
   - Direct: private message belonging to a group
   - Event: public or private calendar event (also a Venue)
@@ -25,7 +24,7 @@
 _Note: see [pkg/bubble](https://github.com/nikovacevic/bubble/tree/master/pkg/bubble) for implementations of domain types._
 
 #### Auth
-Authenticate users using magic links. Respond to token-based authentication with
+Authenticate accounts using magic links. Respond to token-based authentication with
 
 Request a magic link sent to the given
 ```
@@ -40,26 +39,26 @@ Log out of current session
 POST /auth/logout
 ```
 
-#### User
-We should try to maintain as little personal information as possible. Perhaps just ID, email, and name to start. (And photo?)
+#### Account
+We should try to maintain as little personal information as possible. Perhaps just ID, email, and name to start.
 
-How should access control work? Roles and resources? Just roles? How do we tie a user to a venue with permissions?
+How should access control work? Roles and resources? Just roles? How do we tie an account to a venue with permissions?
 
-Get a list of users
+Get a list of accounts
 ```
-GET /user
+GET /account
 ```
-Add a new user (e.g. invite a user to join via email?)
+Add a new account (e.g. invite a account to join via email?)
 ```
-POST /user
+POST /account
 ```
-Update a user (keep edit history?)
+Update a account (keep edit history?)
 ```
-PUT /user/{id}
+PUT /account/{id}
 ```
-Delete a user
+Delete a account
 ```
-DELETE /user/{id}
+DELETE /account/{id}
 ```
 
 #### Venue

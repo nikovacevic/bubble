@@ -25,7 +25,7 @@ type Venue interface {
 }
 
 // Page is a Venue that acts as a document, receiving messages of type Post.
-// It can be public or private. If no Users except the Owner have access, it
+// It can be public or private. If no Accounts except the Owner have access, it
 // can be thought of as a static resource.
 type Page struct {
 	id       int
@@ -35,6 +35,6 @@ type Page struct {
 }
 
 // TODO:
-// Group: private repository for direct messages among select Users
+// Group: private repository for direct messages among select Accounts
 // Event: public or private calendar event, repository for Invitations and RSVPs (also a Message)
 // Poll: public or private respository for votes (also a Message)

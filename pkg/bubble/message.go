@@ -1,12 +1,12 @@
 package bubble
 
-// Message describes an object that can be sent to a Venue by a User.
+// Message describes an object that can be sent to a Venue by a Account.
 type Message interface {
 	// ID is the unique identifier of the message, itself.
 	ID() int
 
-	// UserID is the unique indentifier of the sender.
-	UserID() int
+	// AccountID is the unique indentifier of the sender.
+	AccountID() int
 
 	// VenueID is the unique identifier of the venue to which the message
 	// has been sent.
@@ -24,11 +24,11 @@ type Message interface {
 // Direct implements Message for DMs. Currently just text, but could include
 // images, etc. eventually.
 type Direct struct {
-	id       int
-	userID   int
-	venueID  int
-	isPublic bool
-	Text     string
+	id        int
+	accountID int
+	venueID   int
+	isPublic  bool
+	Text      string
 }
 
 // ID is the unique identifier of the message, itself.
@@ -36,9 +36,9 @@ func (d *Direct) ID() int {
 	return d.id
 }
 
-// UserID is the unique indentifier of the sender.
-func (d *Direct) UserID() int {
-	return d.userID
+// AccountID is the unique indentifier of the sender.
+func (d *Direct) AccountID() int {
+	return d.accountID
 }
 
 // VenueID is the unique identifier of the venue to which the message

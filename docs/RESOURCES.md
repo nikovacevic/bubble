@@ -1,13 +1,15 @@
-[Home](../README.md) | [Model](./MODEL.md)
+[Home](github.com/nikovacevic/bubble) | [Model](./MODEL.md) | [Resources](./RESOURCES.md)
 
-## Similar ideas
+## Resources
+
+### Similar ideas
 - [Disciple](https://www.disciplemedia.com/)
 - [Discourse](https://www.discourse.org/)
 - [Mighty Networks](https://www.mightynetworks.com/)
 
-## Technical reference
+### Technical reference
 
-### Go & PostgreSQL
+#### Go & PostgreSQL
 - https://www.calhoun.io/connecting-to-a-postgresql-database-with-gos-database-sql-package/
 - https://levelup.gitconnected.com/building-a-todo-api-in-golang-with-kubernetes-1ec593f85029
 - https://levelup.gitconnected.com/deploying-dockerized-golang-api-on-kubernetes-with-postgresql-mysql-d190e27ac09f

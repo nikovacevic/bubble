@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS migration (
+    id SERIAL PRIMARY KEY,
+    step INT NOT NULL,
+    completed TIMESTAMP DEFAULT NOW()
+);

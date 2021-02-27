@@ -11,7 +11,7 @@ type Account struct {
 	Email       string               `json:"email"`
 	Name        string               `json:"name"`
 	Permissions Permissions          `json:"permissions"`
-	id          int                  `json:"-"`
+	ID          int                  `json:"-"`
 	idToken     *IdentityToken       `json:"-"`
 	authToken   *AuthenticationToken `json:"-"`
 }
@@ -32,20 +32,11 @@ func (u *Account) Clone() *Account {
 	}
 
 	return &Account{
-		id:          u.id,
+		ID:          u.ID,
 		Permissions: u.Permissions,
 		Email:       u.Email,
 		Name:        u.Name,
 	}
-}
-
-// ID returns a Account's ID
-func (u *Account) ID() int {
-	if u == nil {
-		return 0
-	}
-
-	return u.id
 }
 
 // String returns a string representation of the Account

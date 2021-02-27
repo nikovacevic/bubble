@@ -1,30 +1,30 @@
 package bubble
 
-// VenueType describes the type of venue
-type VenueType int
+// DestinationType describes the type of venue
+type DestinationType int
 
 const (
-	// PageVenue corresponds to a page venue
-	PageVenue VenueType = iota
+	// PageDestination corresponds to a page venue
+	PageDestination DestinationType = iota
 
-	// GroupVenue corresponds to a group chat venue
-	GroupVenue
+	// GroupDestination corresponds to a group chat venue
+	GroupDestination
 
-	// EventVenue corresponds to an event venue
-	EventVenue
+	// EventDestination corresponds to an event venue
+	EventDestination
 
-	// PollVenue corresponds to a poll venue
-	PollVenue
+	// PollDestination corresponds to a poll venue
+	PollDestination
 )
 
-// Venue is a repository for Messages
-type Venue interface {
+// Destination is a repository for Messages
+type Destination interface {
 	ID() int
 	Name() string
 	IsPublic() bool
 }
 
-// Page is a Venue that acts as a document, receiving messages of type Post.
+// Page is a Destination that acts as a document, receiving messages of type Post.
 // It can be public or private. If no Accounts except the Owner have access, it
 // can be thought of as a static resource.
 type Page struct {

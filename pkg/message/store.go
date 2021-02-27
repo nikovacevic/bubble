@@ -6,9 +6,9 @@ import (
 
 // Store provides interactions with a repository of Messages
 type Store interface {
-	// Find should return the Message belonging to the given ID
-	Find(id int) (*bubble.Message, error)
+	// FindMessage should return the Message belonging to the given ID
+	FindMessage(id int) (*bubble.Message, error)
 
-	// Save should insert or update the given Message
-	Save(Message *bubble.Message) error
+	// SaveMessage should insert or update the given Message
+	SaveMessage(Message *bubble.Message) error
 }

@@ -1,6 +1,6 @@
 package bubble
 
-// Message describes an object that can be sent to a Venue by a Account.
+// Message describes an object that can be sent to a Destination by a Account.
 type Message interface {
 	// ID is the unique identifier of the message, itself.
 	ID() int
@@ -8,10 +8,10 @@ type Message interface {
 	// AccountID is the unique indentifier of the sender.
 	AccountID() int
 
-	// VenueID is the unique identifier of the venue to which the message
+	// DestinationID is the unique identifier of the venue to which the message
 	// has been sent.
-	// TODO: should this be plural, VenueIDs?
-	VenueID() int
+	// TODO: should this be plural, DestinationIDs?
+	DestinationID() int
 
 	// IsPublic, if true, means the message can be seen by anyone, even those
 	// who are not authenticated.
@@ -41,9 +41,9 @@ func (d *Direct) AccountID() int {
 	return d.accountID
 }
 
-// VenueID is the unique identifier of the venue to which the message
+// DestinationID is the unique identifier of the venue to which the message
 // has been sent.
-func (d *Direct) VenueID() int {
+func (d *Direct) DestinationID() int {
 	return d.venueID
 }
 
@@ -60,8 +60,8 @@ func (d *Direct) String() string {
 
 // TODO:
 // Post: public or private message belonging to a page or event
-// Event: public or private calendar event (also a Venue)
+// Event: public or private calendar event (also a Destination)
 // Invitation: public or private invitation to join an event
 // RSVP: public or private message belonging to an event
-// Poll: public or private message with vote options (also a Venue)
+// Poll: public or private message with vote options (also a Destination)
 // Vote: public or private message belonging to a poll

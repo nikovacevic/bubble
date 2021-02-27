@@ -15,5 +15,5 @@ If it's simple, it will be easier to build, easier to understand, and easier to 
 If you can't trust it, what's the point?
 
 ## Documentation
-- [Model](docs/MODEL.md): data model, API spec, general back-end design
+- [Spec](docs/SPEC.md): API spec, data model, general design
 - [Resource](docs/RESOURCES.md): repository for external documents, reference material, etc.

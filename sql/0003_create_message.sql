@@ -19,7 +19,8 @@ CREATE TABLE IF NOT EXISTS message (
     FOREIGN KEY (to_destination_id) REFERENCES to_destination (id)
 );
 
-/* TODO: INSERT "comment" (sends to a page, event, or poll) */
+/* TODO: INSERT "post" (sends to a page) */
+/* TODO: INSERT "comment" (sends to a post, event, or poll) */
 /* TODO: INSERT "direct" (sends to a group) */
 /* TODO: INSERT "rsvp" (sends to an event) */
 /* TODO: INSERT "vote" (sends to a poll) */

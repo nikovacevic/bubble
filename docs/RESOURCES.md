@@ -1,4 +1,4 @@
-[Home](https://github.com/nikovacevic/bubble) | [Docs](https://github.com/nikovacevic/bubble/blob/master/docs/)  | [Model](./MODEL.md) | [Resources](./RESOURCES.md)
+[Home](https://github.com/nikovacevic/bubble) | [Docs](https://github.com/nikovacevic/bubble/blob/master/docs/)
 
 ## Resources
 

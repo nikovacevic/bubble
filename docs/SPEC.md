@@ -10,7 +10,6 @@ Log out                POST    /auth/logout
 ```
 
 ### Account
-Get a list of accounts
 ```
 List accounts          GET     /account
 Create account         POST    /account {account}

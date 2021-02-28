@@ -8,7 +8,7 @@ import (
 	"github.com/nikovacevic/bubble/pkg/bubble"
 )
 
-func TestMockStore(t *testing.T) {
+func TestMockStore_ListAccounts(t *testing.T) {
 	var store account.Store
 
 	// MockStore should implement the account.Store interface
@@ -28,4 +28,17 @@ func TestMockStore(t *testing.T) {
 	if len(list) != 10 {
 		t.Fatalf("expected %d accounts; got %d", 10, len(list))
 	}
+
 }
+
+// TODO CreateAccount
+// - success
+// - err: already exists
+
+// TODO FindAccount
+// - err: not found
+// - success
+
+// TODO DeleteAccount
+// - success
+// - err: not found

@@ -26,16 +26,16 @@ func NewMockStore() *MockStore {
 // Seed saves a set of mock Accounts
 func (ms *MockStore) Seed() *MockStore {
 	accounts := []*bubble.Account{
-		bubble.NewAccount("adam@getbubble.org", "Adam"),
-		bubble.NewAccount("beth@getbubble.org", "Beth"),
-		bubble.NewAccount("chip@getbubble.org", "Chip"),
-		bubble.NewAccount("dave@getbubble.org", "Dave"),
-		bubble.NewAccount("elen@getbubble.org", "Elen"),
-		bubble.NewAccount("faye@getbubble.org", "Faye"),
-		bubble.NewAccount("gary@getbubble.org", "Gary"),
-		bubble.NewAccount("hugh@getbubble.org", "Hugh"),
-		bubble.NewAccount("inga@getbubble.org", "Inga"),
-		bubble.NewAccount("jake@getbubble.org", "Jake"),
+		bubble.NewAccount("adam@getbubble.org", "Adam", bubble.OwnerRole),
+		bubble.NewAccount("beth@getbubble.org", "Beth", bubble.AdministratorRole),
+		bubble.NewAccount("chip@getbubble.org", "Chip", bubble.AdministratorRole),
+		bubble.NewAccount("dave@getbubble.org", "Dave", bubble.ModeratorRole),
+		bubble.NewAccount("elen@getbubble.org", "Elen", bubble.ModeratorRole),
+		bubble.NewAccount("faye@getbubble.org", "Faye", bubble.MemberRole),
+		bubble.NewAccount("gary@getbubble.org", "Gary", bubble.MemberRole),
+		bubble.NewAccount("hugh@getbubble.org", "Hugh", bubble.MemberRole),
+		bubble.NewAccount("inga@getbubble.org", "Inga", bubble.MemberRole),
+		bubble.NewAccount("jake@getbubble.org", "Jake", bubble.VisitorRole),
 	}
 
 	for _, account := range accounts {
